@@ -13,3 +13,6 @@ bitsandbytes==0.41.1
 scipy==1.11.3
 sentencepiece==0.1.99
 wandb==0.15.12
+ray==2.8.0
+orjson==3.9.10
+mpi4py==3.1.5
