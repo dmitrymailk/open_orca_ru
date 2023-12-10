@@ -1,0 +1,74 @@
+base_model: TinyLlama/TinyLlama-1.1B-intermediate-step-955k-token-2T
+model_type: LlamaForCausalLM
+tokenizer_type: LlamaTokenizer
+is_llama_derived_model: true
+
+load_in_8bit: false
+load_in_4bit: false
+strict: false
+
+datasets:
+  # - path: dim/OpenOrca-ru-gpt4
+  #   type: alpaca_w_system.load_open_orca_chatml
+  - path: d0rj/OpenOrca-ru
+    type: alpaca_w_system.load_open_orca_chatml
+
+dataset_prepared_path: /code/axolotl/last_run_prepared/
+val_set_size: 1000
+output_dir: ./open_orca_ru
+
+sequence_len: 4096
+sample_packing: true
+pad_to_sequence_len: true
+
+wandb_project: open_orca_tiny_llama_ru
+wandb_entity:
+wandb_watch:
+wandb_run_id:
+wandb_log_model:
+
+gradient_accumulation_steps: 8
+micro_batch_size: 8
+num_epochs: 4
+optimizer: adamw_bnb_8bit
+lr_scheduler: cosine
+learning_rate: 0.0002
+
+train_on_inputs: false
+group_by_length: false
+bf16: true
+fp16: false
+tf32: false
+
+
+
+gradient_checkpointing: true
+early_stopping_patience:
+resume_from_checkpoint: true
+local_rank:
+logging_steps: 1
+xformers_attention:
+flash_attention: true
+
+warmup_steps: 0
+eval_steps: 1000
+eval_table_size:
+eval_table_max_new_tokens: 128
+debug:
+deepspeed: deepspeed/zero2.json
+weight_decay: 0.0
+fsdp:
+fsdp_config:
+special_tokens:
+  bos_token: "<s>"
+  eos_token: "<|im_end|>"
+  unk_token: "<unk>"
+tokens:
+  - "<|im_start|>"
+  - "<|im_end|>"
+
+
+# my params
+save_steps: 100
+save_safetensors: true
+save_total_limit: 1

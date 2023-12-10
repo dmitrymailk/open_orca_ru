@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: .
-    command: /bin/sh -c "while sleep 1000; do :; done"
+    command: cd ./axolotl && bash ./train_open_orca_ru.sh 
     volumes:
       - ./:/code:cached
       - ~/.cache/huggingface/:/root/.cache/huggingface/
