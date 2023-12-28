@@ -9,4 +9,3 @@ services:
     volumes:
       - ./:/code:cached
       - ~/.cache/huggingface/:/root/.cache/huggingface/
-    user: ${CURRENT_UID}
